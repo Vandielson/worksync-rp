@@ -29,6 +29,8 @@ jobs:
 
       - name: Instalar dependências
         run: npm install
+        working-directory: ./frontend
 
       - name: Build do projeto Angular
         run: npm run build -- --configuration=production
+        working-directory: ./frontend
