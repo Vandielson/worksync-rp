@@ -19,39 +19,24 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout do código
+      - name: Checkout code
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
-      - name: Verificar estrutura de diretórios
-        run: |
-          pwd
-          ls -R
-
-      - name: Verificar se a pasta frontend existe
-        run: |
-          if [ ! -d "frontend" ]; then
-            echo "Pasta frontend não encontrada! Verifique o caminho."
-            exit 1
-          fi
-
-      - name: Instalar Node.js
+      - name: Install Node.js
         uses: actions/setup-node@v3
         with:
           node-version: 20
 
-      - name: Instalar dependências
-        run: npm install
-        working-directory: ./frontend
-
-      - name: Build do projeto Angular
-        run: npm run build -- --configuration=production
-        working-directory: ./frontend
-
-      - name: Verificar arquivos após build
+      - name: Verify project structure
         run: ls -R
-        working-directory: ./frontend/dist
 
-      - name: Finalizar com sucesso
-        run: echo "Build concluído com sucesso! 🚀"
+      - name: Install dependencies
+        run: npm install
+        working-directory: frontend
+
+      - name: Build Angular project
+        run: npm run build -- --configuration=production
+        working-directory: frontend
+
+      - name: Finish successfully
+        run: echo "Build completed successfully! 🚀"
