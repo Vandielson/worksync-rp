@@ -23,9 +23,18 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          
-      - name: Verificar conteúdo da pasta
-        run: ls -R
+
+      - name: Verificar estrutura de diretórios
+        run: |
+          pwd
+          ls -R
+
+      - name: Verificar se a pasta frontend existe
+        run: |
+          if [ ! -d "frontend" ]; then
+            echo "Pasta frontend não encontrada! Verifique o caminho."
+            exit 1
+          fi
 
       - name: Instalar Node.js
         uses: actions/setup-node@v3
@@ -39,3 +48,10 @@ jobs:
       - name: Build do projeto Angular
         run: npm run build -- --configuration=production
         working-directory: ./frontend
+
+      - name: Verificar arquivos após build
+        run: ls -R
+        working-directory: ./frontend/dist
+
+      - name: Finalizar com sucesso
+        run: echo "Build concluído com sucesso! 🚀"
