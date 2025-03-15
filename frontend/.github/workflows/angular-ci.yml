@@ -19,24 +19,24 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
+      - name: Checkout do código
         uses: actions/checkout@v4
 
-      - name: Install Node.js
+      - name: Instalar Node.js
         uses: actions/setup-node@v3
         with:
           node-version: 20
 
-      - name: Verify project structure
-        run: ls -R
+      - name: Enter the frontend folder
+        run: cd frontend
 
       - name: Install dependencies
         run: npm install
-        working-directory: frontend
+        working-directory: ./frontend
 
-      - name: Build Angular project
+      - name: Angular project build
         run: npm run build -- --configuration=production
-        working-directory: frontend
+        working-directory: ./frontend
 
       - name: Finish successfully
         run: echo "Build completed successfully! 🚀"
